@@ -1,0 +1,111 @@
+.studylist-container {
+  padding-top: 50px;
+  padding-left: 20%;
+  padding-right: 20%;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+.study-container {
+  width: 98%;
+  display: flex;
+  flex-direction: column;
+}
+
+.study-title {
+  color: #3A3838;
+  font-size: 12px;
+  font-weight: bold;
+}
+/* styles for '...' */
+.study-abstract {
+  color: #3A3838;
+  font-size: 12px;
+  font-weight: normal;
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  max-height: 2.4em;
+  text-align: justify;
+  /* place for '...' */
+  margin-right: -1em;
+  padding-right: 1em;
+}
+/* create the ... */
+.study-abstract:before {
+  content: '...';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+/* hide ... if we have text, which is less than or equal to max lines */
+.study-abstract:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 1em;
+  height: 1em;
+  margin-top: 0.2em;
+  /* bg color = bg color under block */
+  background: white;
+}
+
+.show-more {
+  font-size: 12px;
+  text-align: center;
+}
+
+.divider {
+  width:100%;
+  color:#0978B4;
+  height:2px;
+}
+
+.effective-label{
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  font-size: small;
+  color: white;
+  background-color: #02811F;
+}
+
+.detrimental-label {
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  font-size: small;
+  color: white;
+  background-color: #CD2026;
+}
+
+.inconclusive-label {
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  font-size: small;
+  color: white;
+  background-color: #E96000;
+}
+
+.pagination {
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+}
+
+.pagination a {
+  color: #3A3838;
+  font-size: 12px;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #0978B4;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

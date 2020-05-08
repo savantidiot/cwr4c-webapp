@@ -1,0 +1,248 @@
+body {
+  background: #fafafa;
+  color: #333333;
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #3A3838;
+}
+
+text-color {
+  color: #3A3838;
+}
+
+.bg {
+  background-color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #797575;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #3A3838;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 120px;
+  height: 92px;
+  left: 20px;
+  top: 20px;
+}
+
+.navbar-text-container {
+  width: 100%;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.main-container {
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 580px;
+  background: #ffffff;
+}
+
+.left-container {
+  float: left;
+  border-bottom: 4px solid #0978B4;
+  border-left: 4px solid #0978B4;
+  border-top: 4px solid #0978B4;
+  width: 20%;
+  height: 100%;
+}
+
+.right-container {
+  float: right;
+  border: 4px solid #0978B4;
+  width: 80%;
+  height: 100%;
+}
+
+.cancer-types {
+  top: 0;
+  height: 50%;
+  border-bottom: 4px solid #0978B4;
+  overflow: scroll;
+}
+
+.drug-types {
+  bottom: 0;
+  height: 50%;
+  border-bottom: 4px solid #0978B4;
+  overflow: scroll;
+}
+
+.type-heading {
+  color: #3A3838;
+  font-size: 20px;
+}
+
+.panel-content {
+  margin: 8px;
+}
+
+.search-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.ranked-order-heading {
+  color: #3A3838;
+  font-size: 28px;
+}
+
+.right-panel-header {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  width: 100%;
+  height: 52px;
+  background: rgba(14, 145, 219, 0.25);
+  border-radius: 4px;
+}
+
+.tags-container {
+  width:100%;
+  height: 40px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.articles-container {
+  display: flex;
+  width: 72%;
+  justify-content: flex-end;
+}
+
+.row-container {
+  justify-content: center;
+  display: flex;
+}
+
+.rank-container {
+  width: 6%;
+  color: #3A3838;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.labels-container {
+  width: 15%;
+  color: #3A3838;
+  display: flex;
+  justify-content: center;
+}
+
+.name-container {
+  width: 15%;
+  color: #3A3838;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-button {
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  font-size: small;
+  color: white;
+  background-color: #007bff;
+}
+
+.info-icon {
+  margin-left: 6px;
+  color: #007bff;
+}
+
+.x-icon {
+  margin-left: 4px;
+}
+
+.info-container {
+  height: 100px;
+  width: 100px;
+  visibility: hidden;
+  border-radius: 6px;
+  background-color: white;
+  border-color: #007bff;
+}
+/* Tooltip text */
+.tooltiptext {
+  visibility: inherit;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.info-icon:hover .info-container {
+  visibility: visible;
+}
+
+.red-box {
+  height: 34px;
+  width: 40px;
+  padding: 4px 0;
+  background: #CD2026;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 18px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.orange-box {
+  height: 34px;
+  width: 40px;
+  padding: 4px 0;
+  background: #E96000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 18px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.green-box {
+  height: 34px;
+  width: 40px;
+  padding: 4px 0;
+  background: #02811F;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 18px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.gray-box {
+  height: 34px;
+  width: 40px;
+  padding: 4px 0;
+  background: #797575;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 18px;
+  text-align: center;
+  color: #FFFFFF;
+}
