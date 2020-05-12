@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% block content %}
+  <main role="main" class="main-container">
+    <div class="left-container">
+      <div class="cancer-types">
+        <div class="panel-content">
+          <h3 class="type-heading">Cancer Types</h3>
+          <!-- Search form -->
+          <input class="form-control search-container" onkeyup="searchCancer()"
+                 id="search-cancer" type="text" placeholder="Search for Cancer Type" aria-label="Search">
+          <div id="cancer-list">
+            {% for cancer in cancers %}
+            <li class="form-check">
+              <input class="form-check-input" type="checkbox" onclick="update_tags(this.id, 'data-cancer')"
+                     value="" id="{{ 'Cancer{}'.format(cancer.id) }}" data-cancer="{{ cancer.cancer_type }}"/>
+              <label class="form-check-label text-color" for={{ cancer.id }}>
+                {{ cancer.cancer_type }}
+              </label>
+            </li>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="drug-types">
+        <div class="panel-content">
+        <h3 class="type-heading">Drug Types</h3>
+        <!-- Search form -->
+        <input class="form-control search-container" onkeyup="searchDrug()"
+               id="search-drug" type="text" placeholder="Search for Drug Type" aria-label="Search">
+        <div id="drug-list">
+          {% for drug in drugs %}
+          <li class="form-check">
+            <input class="form-check-input" type="checkbox" onclick="update_tags(this.id, 'data-drug')"
+                   value="" id="{{ 'Drug{}'.format(drug.id) }}" data-drug="{{ drug.intervention_type }}"/>
+            <label class="form-check-label text-color" for={{ drug.id }}>
+              {{ drug.intervention_type }}
+            </label>
+          </li>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="right-container">
+      <div class="panel-content">
+        <div class= "right-panel-header">
+          <h3 class="ranked-order-heading">Ranked Order of Treatments</h3>
+          <i class="fa fa-info-circle info-icon" id="info-icon" aria-hidden="true">
+            <div class="info-container">
+              <div class="tooltiptext">
+                Ranked ordering of results:
+                Treatments are ranked based on evidence contained in scientific
+                articles evaluating the effect of a drug (or combination) on a
+                cancer. <a> Click here </a> to learn more about how treatments are ranked.
+              </div>
+            </div>
+          </i>
+        </div>
+        <div class="tags-container" id="tags">
+        </div>
+        <table style="width:100%">
+          <tr class="articles-container">
+            <th class="labels-container">Articles</th>
+          </tr>
+          <tr class="row-container">
+            <th class="rank-container"></th>
+            <th class="labels-container">Drug</th>
+            <th class="labels-container">Cancer</th>
+            <th class="labels-container">Effective</th>
+            <th class="labels-container">Inconclusive</th>
+            <th class="labels-container">Detrimental</th>
+            <th class="labels-container">All</th>
+          </tr>
+          <tr class="row-container">
+            <th class="rank-container">1</th>
+            <th class="name-container">Prednisolone</th>
+            <th class="name-container">Renal Cancer</th>
+            <th class="name-container"><div class="green-box">11</div></th>
+            <th class="name-container"><div class="orange-box">3</div></th>
+            <th class="name-container"><div class="red-box">0</div></th>
+            <th class="name-container"><div class="gray-box">14</div></th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </main>
+{% endblock content %}
