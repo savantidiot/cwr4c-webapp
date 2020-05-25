@@ -1,7 +1,66 @@
-function update_tags(id, attribute) {
+var drugs = [];
+var cancers = [];
+
+function filterResults() {
+ $.ajax({
+      url : "/home",
+      type : "POST",
+      // data: "hello",
+      data : { drugs : JSON.stringify(drugs), cancers: JSON.stringify(cancers) }
+
+  }).done(function(data) {
+      window.location.reload();
+      console.log("done");
+  })
+  .fail(function(err) {
+      console.log("fail");
+  });
+}
+
+function addTags(type, tag) {
+  tag = tag.toLowerCase();
+  if (type == 'cancer') {
+    cancers.push(tag);
+  } else if (type == 'drug') {
+    drugs.push(tag);
+  }
+}
+
+function removeTags(type, tag) {
+  tag = tag.toLowerCase();
+  if (type == 'cancer') {
+    removeFromArr(cancers, tag);
+  } else if (type == 'drug') {
+    removeFromArr(drugs, tag);
+  }
+}
+
+function removeFromArr(arr, val) {
+    let index = arr.indexOf(val);
+    if (index > -1) {
+        arr.splice(index, 1);
+    }
+}
+
+// Attempt to show tags on back button press
+// window.addEventListener('DOMContentLoaded', () => {
+//    loadTags();
+// }, false);
+//
+// function loadTags() {
+//   let checkboxes = document.getElementsByClassName('form-check-input"');
+//   console.log(checkboxes);
+//   Array.from(checkboxes).forEach((c) => {
+//     update_tags(c.id)
+//     console.log(c.id);
+//   });
+// }
+
+// Update the tags that exist when a user interacts with the checkboxes
+function update_tags(id, type) {
   // Get the checkbox
-  let checkBox = document.getElementById(id);
-  let c_type = checkBox.getAttribute(attribute);
+  const checkBox = document.getElementById(id);
+  const tag = checkBox.getAttribute('data');
 
   let btnId = "btn" + id;
   let btnElement = document.getElementById(btnId);
@@ -10,8 +69,9 @@ function update_tags(id, attribute) {
     let element = document.createElement("button");
     element.setAttribute("id", btnId);
     element.setAttribute("class", "filter-button");
-    element.setAttribute("onclick", "remove_button(id)");
-    element.innerHTML = c_type;
+    element.setAttribute("data-type", type);
+    element.setAttribute("onclick", "removeButton(id)");
+    element.innerHTML = tag;
 
     // the close icon
     let icon = document.createElement("i");
@@ -19,24 +79,33 @@ function update_tags(id, attribute) {
     element.appendChild(icon);
 
     document.getElementById("tags").appendChild(element);
+
+    addTags(type, tag);
+
   } else if (checkBox.checked == false && btnElement != null) {
     btnElement.remove();
+    removeTags(type, tag);
   }
+  filterResults();
 }
 
 // remove the tag button- cancer and drug
-function remove_button(id) {
-  let type_id = id.replace('btn','');
-  let checkBox = document.getElementById(type_id);
-  let btnElement = document.getElementById(id);
+function removeButton(id) {
+  const typeId = id.replace('btn','');
+  const checkBox = document.getElementById(typeId);
+  const tag = checkBox.getAttribute('data');
+  const btnElement = document.getElementById(id);
+  type = btnElement.getAttribute("data-type");
   // remove button and uncheck if box is checked
   checkBox.checked = false;
   btnElement.remove();
+
+  removeTags(type, tag);
+  filterResults();
 }
 
 function searchCancer() {
-  // Declare variables
-  var input, filter, cancerList, list, label, txtValue;
+  let input, filter, cancerList, list, label, txtValue;
   input = document.getElementById("search-cancer");
   filter = input.value.toLowerCase();
   cancerList = document.getElementById("cancer-list");
@@ -55,11 +124,9 @@ function searchCancer() {
 }
 
 function searchDrug() {
-  // Declare variables
-  var input, filter, drugList, list, label, txtValue;
+  let input, filter, drugList, list, label, txtValue;
   input = document.getElementById("search-drug");
   filter = input.value.toLowerCase();
-  console.log(filter);
   drugList = document.getElementById("drug-list");
   list = drugList.getElementsByTagName('li');
 

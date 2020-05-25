@@ -1,74 +1,35 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='studylist.css') }}">
 {% extends "layout.html" %}
-<script>
-  document.body.style.backgroundColor = "yellow";
-</script>
-
 {% block content %}
     <div class="studylist-container">
-      <div class="pagination">
-        <a href="#">&laquo;</a>
-        <a class="active" href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#">&raquo;</a>
+      <div class="studylist-header">
+        <div class="results-found">{{ articles.total }} Results Found</div>
+        <div class="pages-container">
+          <a class="mb-4 mr-2" href="{{ url_for('results', page=articles.prev_num) }}">&laquo;</a>
+          {% for page_num in articles.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+              {% if articles.page == page_num %}
+                <a class="btn fill mb-4" href="{{ url_for('results', page=page_num) }}">{{ page_num }}</a>
+              {% else %}
+                <a class="btn outline mb-4" href="{{ url_for('results', page=page_num) }}">{{ page_num }}</a>
+              {% endif %}
+            {% else %}
+              ...
+            {% endif %}
+          {% endfor %}
+          <a class="mb-4 ml-2" href="{{ url_for('results', page=articles.next_num) }}">&raquo;</a>
+        </div>
       </div>
-    <!-- {% for study in studies %}
-      <div class="study-container">
-        <h3 class="study-title"></h3>
-      </div>
-    {% endfor %} -->
-    <div class="study-container">
-        <h3 class="study-title">Modulation of vinblastine resistance in metastatic renal cell carcinoma with cyclosporine A or tamoxifen: a cancer and leukemia group B study.
-        <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=9815587">[9815587]</a></h3>
-      <div class="study-abstract">Multidrug resistance mediated by P-glycoprotein may be an important cause of chemotherapy failure. Renal cell carcinoma is a disease known to demonstrate a high degree of intrinsic chemotherapy drug resistance, and this has been shown to be related to intrinsic overexpression of P-glycoprotein. </div>
-      <div class="show-more"><a href="">Show More</a></div>
-    </div>
-    <hr class="divider">
-    <div class="study-container">
-        <h3 class="study-title">Modulation of vinblastine resistance in metastatic renal cell carcinoma with cyclosporine A or tamoxifen: a cancer and leukemia group B study.
-        <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=9815587">[9815587]</a></h3>
-      <div class="study-abstract">Multidrug resistance mediated by P-glycoprotein may be an important cause of chemotherapy failure. Renal cell carcinoma is a disease known to demonstrate a high degree of intrinsic chemotherapy drug resistance, and this has been shown to be related to intrinsic overexpression of P-glycoprotein.</div>
-      <div class="show-more"><a href="">Show More</a></div>
-    </div>
-    <hr class="divider">
-    <div class="study-container">
-        <h3 class="study-title">Modulation of vinblastine resistance in metastatic renal cell carcinoma with cyclosporine A or tamoxifen: a cancer and leukemia group B study.
-        <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=9815587">[9815587]</a></h3>
-      <div class="study-abstract">Multidrug resistance mediated by P-glycoprotein may be an important cause of chemotherapy failure. Renal cell carcinoma is a disease known to demonstrate a high degree of intrinsic chemotherapy drug resistance, and this has been shown to be related to intrinsic overexpression of P-glycoprotein. </div>
-      <div class="show-more"><a href="">Show More</a></div>
-    </div>
-    <hr class="divider">
-    <div class="study-container">
-        <h3 class="study-title">Modulation of vinblastine resistance in metastatic renal cell carcinoma with cyclosporine A or tamoxifen: a cancer and leukemia group B study.
-        <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=9815587">[9815587]</a></h3>
-      <div class="study-abstract">Multidrug resistance mediated by P-glycoprotein may be an important cause of chemotherapy </div>
-      <div class="show-more"><a href="">Show More</a></div>
-    </div>
-    <hr class="divider">
-    <div class="study-container">
-        <h3 class="study-title">Modulation of vinblastine resistance in metastatic renal cell carcinoma with cyclosporine A or tamoxifen: a cancer and leukemia group B study.
-        <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=9815587">[9815587]</a></h3>
-      <div class="study-abstract">Multidrug resistance mediated by P-glycoprotein may be an important cause of chemotherapy </div>
-      <div class="show-more"><a href="">Show More</a></div>
-    </div>
-    <hr class="divider">
-    <div class="study-container">
-        <h3 class="study-title">Modulation of vinblastine resistance in metastatic renal cell carcinoma with cyclosporine A or tamoxifen: a cancer and leukemia group B study.
-        <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=9815587">[9815587]</a></h3>
-      <div class="study-abstract">Multidrug resistance mediated by P-glycoprotein may be an important cause of chemotherapy </div>
-      <div class="show-more"><a href="">Show More</a></div>
-    </div>
-    <hr class="divider">
-    <div class="study-container">
-        <h3 class="study-title">Modulation of vinblastine resistance in metastatic renal cell carcinoma with cyclosporine A or tamoxifen: a cancer and leukemia group B study.
-        <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=9815587">[9815587]</a></h3>
-      <div class="study-abstract">Multidrug resistance mediated by P-glycoprotein may be an important cause of chemotherapy </div>
-      <div class="show-more"><a href="">Show More</a></div>
-    </div>
-    <hr class="divider">
+      {% for article in articles.items %}
+        <div class="study-container">
+            <h3 class="study-title">{{ article.title }}
+              <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=9815587">[{{ article.pmid }}]</a>
+            </h3>
+          <div class="study-abstract">{{ article.abstract }}</div>
+          <div class="show-more"><a href="/article/{{ article.pmid }}">Show More</a></div>
+        </div>
+        <hr class="divider">
+      {% endfor %}
+      <button class="back-button" onclick="back()">Back</button>
     </div>
 {% endblock content %}
