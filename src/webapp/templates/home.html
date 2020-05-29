@@ -1,3 +1,4 @@
+<script src="{{ url_for('static', filename='sidePanel.js') }}"></script>
 {% extends "layout.html" %}
 {% block content %}
   <main role="main" class="main-container">
@@ -11,8 +12,8 @@
           <div id="cancer-list">
             {% for cancer in cancers %}
             <li class="form-check">
-              <input class="form-check-input" type="checkbox" onclick="update_tags(this.id, 'data-cancer')"
-                     value="" id="{{ 'Cancer{}'.format(cancer.id) }}" data-cancer="{{ cancer.cancer_type }}"/>
+              <input class="form-check-input" type="checkbox" onclick="update_tags(this.id, 'cancer')"
+                     value="" id="{{ 'Cancer{}'.format(cancer.id) }}" data="{{ cancer.cancer_type }}"/>
               <label class="form-check-label text-color" for={{ cancer.id }}>
                 {{ cancer.cancer_type }}
               </label>
@@ -29,13 +30,13 @@
                id="search-drug" type="text" placeholder="Search for Drug Type" aria-label="Search">
         <div id="drug-list">
           {% for drug in drugs %}
-          <li class="form-check">
-            <input class="form-check-input" type="checkbox" onclick="update_tags(this.id, 'data-drug')"
-                   value="" id="{{ 'Drug{}'.format(drug.id) }}" data-drug="{{ drug.intervention_type }}"/>
-            <label class="form-check-label text-color" for={{ drug.id }}>
-              {{ drug.intervention_type }}
-            </label>
-          </li>
+            <li class="form-check">
+              <input class="form-check-input" type="checkbox" onclick="update_tags(this.id, 'drug')"
+                     value="" id="{{ 'Drug{}'.format(drug.id) }}" data="{{ drug.intervention_type }}"/>
+              <label class="form-check-label text-color" for={{ drug.id }}>
+                {{ drug.intervention_type }}
+              </label>
+            </li>
           {% endfor %}
         </div>
       </div>
@@ -71,15 +72,17 @@
             <th class="labels-container">Detrimental</th>
             <th class="labels-container">All</th>
           </tr>
-          <tr class="row-container">
-            <th class="rank-container">1</th>
-            <th class="name-container">Prednisolone</th>
-            <th class="name-container">Renal Cancer</th>
-            <th class="name-container"><div class="green-box">11</div></th>
-            <th class="name-container"><div class="orange-box">3</div></th>
-            <th class="name-container"><div class="red-box">0</div></th>
-            <th class="name-container"><div class="gray-box">14</div></th>
-          </tr>
+          {% for rank in ranks %}
+            <tr class="row-container">
+              <th class="rank-container">{{ loop.index }}</th>
+              <th class="name-container">{{ rank.intervention }}</th>
+              <th class="name-container">{{ rank.cancer }}</th>
+              <th class="name-container"><div class="green-box">{{ rank.effective }}</div></th>
+              <th class="name-container"><div class="orange-box">{{ rank.inconclusive }}</div></th>
+              <th class="name-container"><div class="red-box">{{ rank.detrimental }}</div></th>
+              <th class="name-container"><div class="gray-box">{{ rank.all }}</div></th>
+            </tr>
+          {% endfor %}
         </table>
       </div>
     </div>

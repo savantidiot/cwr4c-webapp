@@ -7,8 +7,42 @@
   background: white;
 }
 
+.studylist-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.results-found {
+  float: left;
+  margin-bottom: 1.5rem;
+  font-size: 12px;
+  color: rgba(0,0,0,.5);
+}
+
+.pages-container {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.pages-container a.outline {
+  color: #0978B4;
+  background-color: transparent;
+  background-image: none;
+  border-color: #0978B4;
+}
+
+.pages-container a.fill {
+  background-color: #0978B4;
+  border-color: #0978B4;
+  color: white;
+}
+
+.pages-container a:hover:not(.active) {background-color: #ddd;}
+
 .study-container {
-  width: 98%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -20,6 +54,7 @@
 }
 /* styles for '...' */
 .study-abstract {
+  width: 98%;
   color: #3A3838;
   font-size: 12px;
   font-weight: normal;
@@ -88,24 +123,3 @@
   color: white;
   background-color: #E96000;
 }
-
-.pagination {
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 10px;
-}
-
-.pagination a {
-  color: #3A3838;
-  font-size: 12px;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.pagination a.active {
-  background-color: #0978B4;
-  color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}

@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='article.css') }}">
+{% extends "layout.html" %}
+{% block content %}
+        <div class="article-container">
+          <div class="article-tag-container">
+            <div class="article-tag">Cancer Type: {{ article.cancer }}</div>
+            <div class="article-tag">Drug Name: {{ article.intervention }}</div>
+            <div class="article-tag">Therapeutic Effect: {{ article.association }}</div>
+          </div>
+          <div class="article-border">
+            <div class="title">{{ article.title }}
+              <a class="pmid" href="https://www.ncbi.nlm.nih.gov/pubmed/?term=9815587">[{{ article.pmid }}]</a>
+            </div>
+          <div class="abstract-header"> Abstract </div>
+          <div class="=abstract">{{ article.abstract }}</div>
+          </div>
+          <button class="back-button" onclick="back()">Back</button>
+        </div>
+{% endblock content %}
