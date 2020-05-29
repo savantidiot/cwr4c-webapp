@@ -1,13 +1,13 @@
 var drugs = [];
 var cancers = [];
 
+// Send a post request to the home page everytime a cancer type or drug type is
+// selected or deselected
 function filterResults() {
  $.ajax({
       url : "/home",
       type : "POST",
-      // data: "hello",
       data : { drugs : JSON.stringify(drugs), cancers: JSON.stringify(cancers) }
-
   }).done(function(data) {
       window.location.reload();
       console.log("done");
@@ -17,6 +17,7 @@ function filterResults() {
   });
 }
 
+// helper method called to add the selected cancer or drug type to the global arrays
 function addTags(type, tag) {
   tag = tag.toLowerCase();
   if (type == 'cancer') {
@@ -26,6 +27,7 @@ function addTags(type, tag) {
   }
 }
 
+// helper method called to remove the deselected cancer or drug type from the global arrays
 function removeTags(type, tag) {
   tag = tag.toLowerCase();
   if (type == 'cancer') {
@@ -35,6 +37,7 @@ function removeTags(type, tag) {
   }
 }
 
+// helper method to remove the specific value from the given array
 function removeFromArr(arr, val) {
     let index = arr.indexOf(val);
     if (index > -1) {
@@ -62,6 +65,7 @@ function update_tags(id, type) {
   const checkBox = document.getElementById(id);
   const tag = checkBox.getAttribute('data');
 
+  // create the button element
   let btnId = "btn" + id;
   let btnElement = document.getElementById(btnId);
   // If the checkbox is checked, display the output text
@@ -83,13 +87,14 @@ function update_tags(id, type) {
     addTags(type, tag);
 
   } else if (checkBox.checked == false && btnElement != null) {
+    // if checkbox is unchecked then remove the tag
     btnElement.remove();
     removeTags(type, tag);
   }
   filterResults();
 }
 
-// remove the tag button- cancer and drug
+// remove the tag button- cancer and drug (called when x on button clicked)
 function removeButton(id) {
   const typeId = id.replace('btn','');
   const checkBox = document.getElementById(typeId);
@@ -104,6 +109,7 @@ function removeButton(id) {
   filterResults();
 }
 
+// Search functionality when user interacts with cancer search bar
 function searchCancer() {
   let input, filter, cancerList, list, label, txtValue;
   input = document.getElementById("search-cancer");
@@ -111,7 +117,7 @@ function searchCancer() {
   cancerList = document.getElementById("cancer-list");
   list = cancerList.getElementsByTagName('li');
 
-  // Loop through all list items, and hide those who don't match the search query
+  // Loop through all list items, and hide those that don't match
   for (i = 0; i < list.length; i++) {
     label = list[i].getElementsByTagName("label")[0];
     txtValue = label.textContent || label.innerText;
@@ -123,6 +129,7 @@ function searchCancer() {
   }
 }
 
+// When user interacts with drug search bar
 function searchDrug() {
   let input, filter, drugList, list, label, txtValue;
   input = document.getElementById("search-drug");
@@ -130,7 +137,7 @@ function searchDrug() {
   drugList = document.getElementById("drug-list");
   list = drugList.getElementsByTagName('li');
 
-  // Loop through all list items, and hide those who don't match the search query
+    // Loop through all list items, and hide those that don't match
   for (i = 0; i < list.length; i++) {
     label = list[i].getElementsByTagName("label")[0];
     txtValue = label.textContent || label.innerText;
